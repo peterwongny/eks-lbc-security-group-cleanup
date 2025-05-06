@@ -39,9 +39,44 @@ This Lambda function:
 └── requirements.txt         # Python dependencies
 ```
 
+## Development
+
+### Prerequisites
+
+- Python 3.9+
+- Terraform 1.0.0+
+- AWS CLI configured with appropriate permissions
+
+### Setup Development Environment
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/clean_unused_sg_eks_lbc.git
+   cd clean_unused_sg_eks_lbc
+   ```
+
+2. Install development dependencies:
+   ```bash
+   make install-dev
+   ```
+
+### Running Tests
+
+Run the test suite:
+```bash
+make test
+```
+
+### Linting
+
+Check code quality:
+```bash
+make lint
+```
+
 ## Deployment
 
-### Using Terraform
+### Using Terraform (Recommended)
 
 1. Navigate to the terraform directory:
    ```bash
@@ -65,9 +100,18 @@ This Lambda function:
    terraform apply
    ```
 
+Alternatively, you can use the Makefile:
+```bash
+make deploy-terraform
+```
+
 ### Manual Deployment
 
 1. Create a ZIP file with the Lambda function:
+   ```bash
+   make package
+   ```
+   Or manually:
    ```bash
    cd src
    zip -r ../function.zip lambda_function.py

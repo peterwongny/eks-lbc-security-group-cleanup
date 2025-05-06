@@ -19,25 +19,20 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+.terraform.lock.hcl
 
 # Lambda deployment packages
 *.zip
-
-# Terraform
-**/.terraform/*
-*.tfstate
-*.tfstate.*
-crash.log
-crash.*.log
-*.tfvars
-!terraform.tfvars.example
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-.terraformrc
-terraform.rc
-.terraform.lock.hcl
 
 # IDE
 .idea/
@@ -45,14 +40,6 @@ terraform.rc
 *.swp
 *.swo
 
-# OS specific
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
-
-# Test files
-test_*.json

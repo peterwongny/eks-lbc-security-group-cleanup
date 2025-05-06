@@ -9,18 +9,18 @@ provider "aws" {
 # Archive the Lambda function code
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file = "${path.module}/../lambda_function_optimized_v2.py"
-  output_path = "${path.module}/function_optimized_v2.zip"
+  source_file = "${path.module}/../src/lambda_function.py"
+  output_path = "${path.module}/function.zip"
 }
 
 # Create the Lambda function
 resource "aws_lambda_function" "eks_lbc_sg_cleanup" {
   function_name    = var.function_name
-  description      = "Optimized version for cleaning up unused security groups created by EKS LBC with built-in boto3 retry"
+  description      = "Lambda function for cleaning up unused security groups created by EKS LBC with built-in boto3 retry"
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   role             = aws_iam_role.lambda_role.arn
-  handler          = "lambda_function_optimized_v2.lambda_handler"
+  handler          = "lambda_function.lambda_handler"
   runtime          = "python3.9"
   timeout          = 900
   memory_size      = 1024
