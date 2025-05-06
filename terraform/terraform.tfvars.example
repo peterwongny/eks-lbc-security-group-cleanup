@@ -1,0 +1,52 @@
+# AWS region to deploy resources in
+aws_region = "us-east-1"
+
+# Name of the Lambda function
+function_name = "EksLbcSecurityGroupCleanup"
+
+# Whether to run in dry run mode (true) or actually delete security groups (false)
+dry_run = "true"
+
+# Tag key prefix used by LBC
+lbc_tag_key = "kubernetes.io/cluster/"
+
+# Maximum number of security groups to process in a single run
+max_items_per_run = "5000"
+
+# Maximum number of concurrent workers for parallel processing
+max_workers = "10"
+
+# List of security group IDs to exclude from cleanup
+exclude_sg_ids = [
+  # "sg-12345678",
+  # "sg-87654321"
+]
+
+# CloudWatch Events schedule expression for triggering the Lambda function
+schedule_expression = "rate(1 day)"
+
+# Whether the CloudWatch Events schedule is enabled
+schedule_enabled = true
+
+# List of ARNs to notify when the Lambda function alarms
+alarm_actions = [
+  # "arn:aws:sns:us-east-1:123456789012:my-topic"
+]
+
+# List of ARNs to notify when the Lambda function alarms return to OK state
+ok_actions = [
+  # "arn:aws:sns:us-east-1:123456789012:my-topic"
+]
+
+# Whether to enable the alarm for high security group deletion counts
+enable_high_deletion_alarm = false
+
+# Threshold for the high deletion count alarm
+high_deletion_threshold = 50
+
+# Tags to apply to all resources
+tags = {
+  Terraform   = "true"
+  Application = "EksLbcSecurityGroupCleanup"
+  Environment = "production"
+}
